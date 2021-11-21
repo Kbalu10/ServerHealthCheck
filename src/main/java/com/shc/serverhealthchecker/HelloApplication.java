@@ -18,6 +18,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         //Test Commit Stephen Kurtis
+        //Test Commit Alexander Sutter
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
