@@ -17,7 +17,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        //Test Commit Stephen Kurtis
+        //Branch Test Commit Stephen Kurtis, This is from the branch "StephenBranch"
         //Test Commit Alexander Sutter
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
