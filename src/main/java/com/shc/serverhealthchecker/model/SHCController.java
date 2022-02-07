@@ -7,14 +7,18 @@ public class SHCController {
     protected ArrayList<SHCView> arrViews = new ArrayList();
 
     public void reportMsg(Msg msg){
-        throw new RuntimeException("report message NOT implemented yet!");
+
+      for(int i=0; i<this.arrViews.size(); i++){
+          SHCView view = this.arrViews.get(i);
+          view.displayMsg(msg);
+      }
     }
     public void addChecker(Checker checker){
-        throw new RuntimeException("report message NOT implemented yet!");
+       this.arrCheckers.add(checker);
     }
 
     public void addView(SHCView view){
-        throw new RuntimeException("report message NOT implemented yet!");
+        this.arrViews.add(view);
     }
 
     public ArrayList<Checker> getCheckers() {return this.arrCheckers;}

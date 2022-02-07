@@ -33,8 +33,12 @@ public class HelloApplication extends Application {
         PwdChecker pwdchecker = new PwdChecker(controller);
         PwdCheckerView pwdview = new PwdCheckerView(ta1);
         this.controller.addChecker(pwdchecker);
-        this.controller.addChecker(pwdview);
+        this.controller.addView(pwdview);
         stage.show();
+
+        //SHOULD BE IMPROVED LATER
+        pwdchecker.start();
+
     }
 
     public static void main(String[] args) {
