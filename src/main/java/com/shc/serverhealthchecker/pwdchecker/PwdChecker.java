@@ -7,7 +7,7 @@ import com.shc.serverhealthchecker.model.SHCController;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class PwdChecker extends Checker {
+public class PwdChecker extends Checker{
 
     protected int progress = 0;
     Process proc = null;
@@ -15,27 +15,33 @@ public class PwdChecker extends Checker {
     public PwdChecker(SHCController controller){
         super(controller);
     }
+
     @Override
     public void start() {
-        try {
-            Process pr = Runtime.getRuntime().exec("ping google.com");
-            this.proc = pr;
+        Runnable runnable = () ->
+        {
+            try {
+                Process pr = Runtime.getRuntime().exec("ls");
+                this.proc = pr;
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-            String line;
-            while ((line = in.readLine()) != null) {
-                System.out.println(line);
-                this.progress++;
-                this.controller.reportMsg(new Msg(Msg.DEBUG, "state", line, "PwdChecker"));
+                BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+                String line;
+                while ((line = in.readLine()) != null) {
+                    System.out.println(line);
+                    this.progress++;
+                    this.controller.reportMsg(new Msg(Msg.DEBUG, "state", line, "PwdChecker"));
+                }
+                pr.waitFor();
+                this.progress = 100;
+                System.out.println("ok!");
+
+                in.close();
+            } catch (Exception exc) {
+                System.out.println("exception");
             }
-            pr.waitFor();
-            this.progress = 100;
-            System.out.println("ok!");
-
-            in.close();
-        }catch(Exception exc){
-            System.out.println("exception");
-        }
+        };
+        Thread t = new Thread(runnable);
+        t.start();
     }
 
     @Override

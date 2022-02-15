@@ -37,6 +37,8 @@ public class HelloApplication extends Application {
         stage.show();
 
         //SHOULD BE IMPROVED LATER
+        pwdchecker.start();
+        /*
         Thread t = new Thread(new Runnable() {
             public void run() {
                 System.out.println("Starting");
@@ -46,6 +48,7 @@ public class HelloApplication extends Application {
         });
 
         t.start();
+        */
     }
 
     public static void main(String[] args) {
