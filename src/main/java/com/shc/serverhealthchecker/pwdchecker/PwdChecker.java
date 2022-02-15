@@ -18,7 +18,7 @@ public class PwdChecker extends Checker {
     @Override
     public void start() {
         try {
-            Process pr = Runtime.getRuntime().exec("ping 8.8.8.8");
+            Process pr = Runtime.getRuntime().exec("ping google.com");
             this.proc = pr;
 
             BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
