@@ -3,6 +3,8 @@ package com.shc.serverhealthchecker;
 import com.shc.serverhealthchecker.model.SHCController;
 import com.shc.serverhealthchecker.pwdchecker.PwdChecker;
 import com.shc.serverhealthchecker.pwdchecker.PwdCheckerView;
+import com.shc.serverhealthchecker.viruschecker.VirusChecker;
+import com.shc.serverhealthchecker.viruschecker.VirusCheckerView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,6 +34,8 @@ public class HelloApplication extends Application {
         this.controller = new SHCController();
         PwdChecker pwdchecker = new PwdChecker(controller);
         PwdCheckerView pwdview = new PwdCheckerView(ta1);
+        VirusChecker viruschecker = new VirusChecker(controller);
+        VirusCheckerView virusview = new VirusCheckerView(ta1);
         this.controller.addChecker(pwdchecker);
         this.controller.addView(pwdview);
         stage.show();
