@@ -21,6 +21,7 @@ public class VirusChecker extends Checker{
         Runnable runnable = () ->
         {
             try {
+                Process initial = Runtime.getRuntime().exec("sudo apt install ./external/clamav.0.104.2.linux.x86_64.deb");
                 Process pr = Runtime.getRuntime().exec("echo VirusCheck");
                 this.proc = pr;
 

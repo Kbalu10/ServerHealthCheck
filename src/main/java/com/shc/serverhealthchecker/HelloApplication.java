@@ -38,10 +38,13 @@ public class HelloApplication extends Application {
         VirusCheckerView virusview = new VirusCheckerView(ta1);
         this.controller.addChecker(pwdchecker);
         this.controller.addView(pwdview);
+        this.controller.addChecker(viruschecker);
+        this.controller.addView(virusview);
         stage.show();
 
         //SHOULD BE IMPROVED LATER
         pwdchecker.start();
+        viruschecker.start();
         /*
         Thread t = new Thread(new Runnable() {
             public void run() {
