@@ -1,5 +1,7 @@
 package com.shc.serverhealthchecker;
 
+import com.shc.serverhealthchecker.cfgchecker.CfgChecker;
+import com.shc.serverhealthchecker.cfgchecker.CfgCheckerView;
 import com.shc.serverhealthchecker.model.SHCController;
 import com.shc.serverhealthchecker.pwdchecker.PwdChecker;
 import com.shc.serverhealthchecker.pwdchecker.PwdCheckerView;
@@ -32,12 +34,14 @@ public class HelloApplication extends Application {
         this.controller = new SHCController();
         PwdChecker pwdchecker = new PwdChecker(controller);
         PwdCheckerView pwdview = new PwdCheckerView(ta1);
+        CfgChecker cfgchecker = new CfgChecker(controller);
+        CfgCheckerView cfgview = new CfgCheckerView(ta1);
         this.controller.addChecker(pwdchecker);
         this.controller.addView(pwdview);
         stage.show();
 
         //SHOULD BE IMPROVED LATER
-        pwdchecker.start();
+        cfgchecker.start();
 
     }
 
