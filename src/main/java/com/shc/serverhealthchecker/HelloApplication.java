@@ -20,9 +20,12 @@ public class HelloApplication extends Application {
         //Branch Test Commit Stephen Kurtis, This is from the branch "StephenBranch"
         //Test Commit Alexander Sutter
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        
+        //first user interface
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("Main Menu");
         stage.setScene(scene);
+       
         TextArea ta1 = new TextArea();
         ta1.setMaxWidth(200.0);
         ta1.setMaxHeight(200.0);
@@ -34,6 +37,7 @@ public class HelloApplication extends Application {
         PwdCheckerView pwdview = new PwdCheckerView(ta1);
         this.controller.addChecker(pwdchecker);
         this.controller.addView(pwdview);
+        
         stage.show();
 
         //SHOULD BE IMPROVED LATER
