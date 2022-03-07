@@ -5,16 +5,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="238.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shc.serverhealthchecker.HelloController">
+<AnchorPane prefHeight="444.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shc.serverhealthchecker.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
        <Button onAction="#switchScene1" text="Main Menu" />
-      <Label layoutX="188.0" layoutY="24.0" prefHeight="46.0" prefWidth="125.0" text="Results" textAlignment="CENTER">
+      <Label layoutX="301.0" prefHeight="68.0" prefWidth="260.0" text="Results" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <ProgressBar layoutX="131.0" layoutY="142.0" prefWidth="200.0" progress="0.0" />
+      <ProgressBar layoutX="409.0" layoutY="76.0" prefWidth="200.0" progress="0.0" />
+      <ScrollPane layoutX="21.0" layoutY="66.0" prefHeight="152.0" prefWidth="125.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="159.0" prefWidth="131.0">
+               <children>
+                  <Label layoutX="52.0" layoutY="192.0" text="Label" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Label layoutX="64.0" layoutY="47.0" text="Warnings" />
+      <Label layoutX="77.0" layoutY="248.0" text="Errors" />
+      <ScrollPane layoutX="22.0" layoutY="264.0" prefHeight="152.0" prefWidth="125.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="124.0">
+               <children>
+                  <Label layoutX="52.0" layoutY="192.0" text="Label" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <ProgressBar layoutX="409.0" layoutY="132.0" prefWidth="200.0" progress="0.0" />
+      <ProgressBar layoutX="409.0" layoutY="188.0" prefWidth="200.0" progress="0.0" />
+      <ProgressBar layoutX="409.0" layoutY="254.0" prefWidth="200.0" progress="0.0" />
    </children>
 </AnchorPane>
+
