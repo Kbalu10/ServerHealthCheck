@@ -5,6 +5,7 @@ import com.shc.serverhealthchecker.model.Msg;
 import com.shc.serverhealthchecker.model.SHCController;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 
 public class VirusChecker extends Checker{
@@ -21,10 +22,25 @@ public class VirusChecker extends Checker{
         Runnable runnable = () ->
         {
             try {
-                Process initial = Runtime.getRuntime().exec("sudo apt install ./external/clamav.0.104.2.linux.x86_64.deb");
-                Process pr = Runtime.getRuntime().exec("echo VirusCheck");
+                File tempFile = new File("/usr/local/bin/clamscan");
+                if(!tempFile.exists()){
+                    Process initial = Runtime.getRuntime().exec("sudo clamStart.sh");
+                    System.out.println("File Doesn't exist");
+                }
+                String filePath = "/UnknownFile/";
+                File fileExists = new File(filePath);
+                while(!fileExists.exists()){
+                    System.out.println("Path doesnt exist");
+                    filePath = "/home/";
+                    fileExists = new File(filePath);
+                }
+                System.out.println("File Exists");
+                String clam = "sudo clamscan -r ";
+                String command = clam.concat(filePath);
+                //Process fresh = Runtime.getRuntime().exec("sudo freshclam");
+                //this.proc = fresh;
+                Process pr = Runtime.getRuntime().exec(command);
                 this.proc = pr;
-
                 BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
                 String line;
                 while ((line = in.readLine()) != null) {
@@ -32,6 +48,7 @@ public class VirusChecker extends Checker{
                     this.progress++;
                     this.controller.reportMsg(new Msg(Msg.DEBUG, "state", line, "VirusChecker"));
                 }
+
                 pr.waitFor();
                 this.progress = 100;
                 System.out.println("ok!");
@@ -39,6 +56,7 @@ public class VirusChecker extends Checker{
                 in.close();
             } catch (Exception exc) {
                 System.out.println("exception");
+                exc.printStackTrace();
             }
         };
         Thread t = new Thread(runnable);
@@ -59,4 +77,5 @@ public class VirusChecker extends Checker{
     public int getProgress() {
         return this.progress;
     }
+
 }
