@@ -43,7 +43,7 @@ public class HelloApplication extends Application {
         stage.show();
 
         //SHOULD BE IMPROVED LATER
-        pwdchecker.start();
+        //pwdchecker.start();
         viruschecker.start();
         /*
         Thread t = new Thread(new Runnable() {

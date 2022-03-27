@@ -24,8 +24,8 @@ public class VirusChecker extends Checker{
             try {
                 File tempFile = new File("/usr/local/bin/clamscan");
                 if(!tempFile.exists()){
+                    System.out.println("ClamAV Doesn't exist");
                     Process initial = Runtime.getRuntime().exec("sudo clamStart.sh");
-                    System.out.println("File Doesn't exist");
                 }
                 String filePath = "/UnknownFile/";
                 File fileExists = new File(filePath);
