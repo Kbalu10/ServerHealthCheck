@@ -21,10 +21,12 @@ public class HelloApplication extends Application {
 
         //Branch Test Commit Stephen Kurtis, This is from the branch "StephenBranch"
         //Test Commit Alexander Sutter
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("scene1.fxml"));
+
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("Main Menu!");
         stage.setScene(scene);
+
         TextArea ta1 = new TextArea();
         ta1.setMaxWidth(200.0);
         ta1.setMaxHeight(200.0);
