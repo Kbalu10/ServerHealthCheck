@@ -12,7 +12,7 @@ public class CfgCheckerView extends SHCView{
         }
         @Override
         public void displayMsg(Msg msg) {
-            String line = msg.submitter + ": " + msg.title;
+            String line = msg.submitter + ": " + msg.title + ": " + msg.details;
             this.ta.setText(this.ta.getText() + "\n" + line);
         }
 

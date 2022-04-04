@@ -19,16 +19,13 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        //Branch Test Commit Stephen Kurtis, This is from the branch "StephenBranch"
-        //Test Commit Alexander Sutter
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+
         stage.setTitle("Hello!");
-        stage.setScene(scene);
+
         TextArea ta1 = new TextArea();
         ta1.setMaxWidth(200.0);
         ta1.setMaxHeight(200.0);
-
 
         //. create all model, view, and controller class
         this.controller = new SHCController();
@@ -38,6 +35,11 @@ public class HelloApplication extends Application {
         CfgCheckerView cfgview = new CfgCheckerView(ta1);
         this.controller.addChecker(pwdchecker);
         this.controller.addView(pwdview);
+        this.controller.addChecker(cfgchecker);
+        this.controller.addView(cfgview);
+        ta1.setText("hello");
+        Scene scene = new Scene(ta1, 900, 500);
+        stage.setScene(scene);
         stage.show();
 
         //SHOULD BE IMPROVED LATER

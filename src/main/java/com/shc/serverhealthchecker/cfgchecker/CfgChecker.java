@@ -1,7 +1,10 @@
 package com.shc.serverhealthchecker.cfgchecker;
 
 import com.shc.serverhealthchecker.model.Checker;
+import com.shc.serverhealthchecker.model.Msg;
 import com.shc.serverhealthchecker.model.SHCController;
+import javafx.scene.control.TextArea;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -29,7 +32,6 @@ public class CfgChecker extends Checker {
             try {
                 Process pr = Runtime.getRuntime().exec("echo ConfigCheck");
                 this.proc = pr;
-
                 BufferedReader reader = new BufferedReader(new FileReader("/home/u/Downloads/configfilepaths.txt"));
                 String line = reader.readLine();
                 while (line != null) {
@@ -37,9 +39,15 @@ public class CfgChecker extends Checker {
                     FileOwnerAttributeView file = Files.getFileAttributeView(path, FileOwnerAttributeView.class);
                     try {
                         UserPrincipal user = file.getOwner();
-                        System.out.println("File Path: " + path + " | Owner: " + user.getName());
+                        String ownerMsg = "File Path: " + path + " | Owner: " + user.getName();
+                        Msg ownerName = new Msg(1, "File Owner", ownerMsg, "CFG Checker");
+                        this.controller.reportMsg(ownerName);
+                        //System.out.println("File Path: " + path + " | Owner: " + user.getName());
                         if (user.getName().equals("root")) {
-                            System.out.println("Warning: " + "\"" + path + "\" " + "Has Root Access!");
+                            //System.out.println("Warning: " + "\"" + path + "\" " + "Has Root Access!");
+                            String hasRoot = "Warning: " + "\"" + path + "\" " + "Has Root Access!";
+                            Msg rootMsg = new Msg(1, "Root Access", hasRoot, "CFG Checker" );
+                            this.controller.reportMsg(rootMsg);
                         }
                     } catch (Exception e) {
                         System.out.println(e);
