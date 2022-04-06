@@ -1,17 +1,24 @@
 package com.shc.serverhealthchecker;
 
+import com.shc.serverhealthchecker.model.Checker;
+import com.shc.serverhealthchecker.model.Msg;
 import com.shc.serverhealthchecker.model.SHCController;
+import com.shc.serverhealthchecker.model.SHCView;
 import com.shc.serverhealthchecker.pwdchecker.PwdChecker;
 import com.shc.serverhealthchecker.pwdchecker.PwdCheckerView;
 import com.shc.serverhealthchecker.viruschecker.VirusChecker;
 import com.shc.serverhealthchecker.viruschecker.VirusCheckerView;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HelloApplication extends Application {
     protected SHCController controller;
@@ -26,6 +33,8 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Main Menu!");
         stage.setScene(scene);
+        HelloController cont = fxmlLoader.getController();
+        cont.setMain(this);
 
         TextArea ta1 = new TextArea();
         ta1.setMaxWidth(200.0);
@@ -46,7 +55,9 @@ public class HelloApplication extends Application {
 
         //SHOULD BE IMPROVED LATER
         //pwdchecker.start();
-        viruschecker.start();
+        //viruschecker.start();
+
+
         /*
         Thread t = new Thread(new Runnable() {
             public void run() {
@@ -58,8 +69,15 @@ public class HelloApplication extends Application {
 
         t.start();
         */
+
     }
 
+    public void startAllCheck() throws Exception{
+        ArrayList<Checker> checkArr = controller.getCheckers();
+        for(int i=0; i<checkArr.size(); i++) {
+            checkArr.get(i).start();
+        }
+    }
     public static void main(String[] args) {
         launch();
     }

@@ -17,7 +17,7 @@
             </font></Label>
         <Button layoutX="160.0" layoutY="106.0" onAction="#switchScene3" text="Password Security Check" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Button layoutX="178.0" layoutY="147.0" onAction="#switchScene3" text="Config File Check" />
-        <Button layoutX="185.0" layoutY="190.0" onAction="#switchScene3" text="Anti-virus Scan" GridPane.rowIndex="3" />
+        <Button fx:id="VirusBtn" layoutX="185.0" layoutY="190.0" onAction="#switchScene3" text="Anti-virus Scan" GridPane.rowIndex="3" />
         <Button layoutX="178.0" layoutY="230.0" onAction="#switchScene3" text="Full System Scan" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     </children>
 </AnchorPane>

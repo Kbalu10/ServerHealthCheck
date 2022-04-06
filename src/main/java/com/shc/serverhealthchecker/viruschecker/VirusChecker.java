@@ -30,10 +30,11 @@ public class VirusChecker extends Checker{
                     System.out.println("ClamAV Doesn't exist");
                     Process initial = Runtime.getRuntime().exec("sudo clamStart.sh");
                 }
+                System.out.println("Starting VirusCheck");
                 String filePath = "/UnknownFile/";
                 File fileExists = new File(filePath);
                 while(!fileExists.exists()){
-                    System.out.println("Path doesnt exist");
+                    System.out.println(filePath+": Path doesnt exist");
                     filePath = "/home/";
                     fileExists = new File(filePath);
                 }
@@ -66,6 +67,7 @@ public class VirusChecker extends Checker{
                 String line = null;
                 while ((line = reader.readLine()) != null){
                     System.out.println(line);
+                    this.controller.reportMsg(new Msg(Msg.DEBUG, "state", line, "VirusChecker"));
                     this.progress++;
                 }
 
