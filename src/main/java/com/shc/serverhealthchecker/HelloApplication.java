@@ -43,6 +43,7 @@ public class HelloApplication extends Application {
         stage.show();
 
         //SHOULD BE IMPROVED LATER
+        pwdchecker.start();
         cfgchecker.start();
 
     }

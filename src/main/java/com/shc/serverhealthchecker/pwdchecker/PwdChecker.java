@@ -18,8 +18,10 @@ public class PwdChecker extends Checker {
     @Override
     public void start() {
         try {
-            Process pr = Runtime.getRuntime().exec("ping 8.8.8.8");
+            Process pr = Runtime.getRuntime().exec("echo pwdcheck");
             this.proc = pr;
+            Msg test1 = new Msg(1, "PWD CHECKER TEST PRINT", "PWD MSG TEST", "PWD Checker");
+            this.controller.reportMsg(test1);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
             String line;

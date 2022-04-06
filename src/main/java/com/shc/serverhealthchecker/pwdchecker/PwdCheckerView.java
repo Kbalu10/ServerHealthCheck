@@ -12,8 +12,10 @@ public class PwdCheckerView extends SHCView {
     }
     @Override
     public void displayMsg(Msg msg) {
-        String line = msg.submitter + ": " + msg.title;
-        this.ta.setText(this.ta.getText() + "\n" + line);
+        if (msg.submitter == "PWD Checker"){
+            String line = msg.submitter + ": " + msg.title + ": " + msg.details;
+            this.ta.setText(this.ta.getText() + "\n" + line);
+        }
     }
 
 }
