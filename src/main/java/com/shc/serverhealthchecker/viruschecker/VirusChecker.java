@@ -14,7 +14,9 @@ import java.util.List;
 public class VirusChecker extends Checker{
 
     protected int progress = 0;
+    private boolean stop;
     Process proc = null;
+
 
     public VirusChecker(SHCController controller){
         super(controller);
@@ -25,11 +27,13 @@ public class VirusChecker extends Checker{
         Runnable runnable = () ->
         {
             try {
+                stop = false;
                 File tempFile = new File("/usr/local/bin/clamscan");
                 if(!tempFile.exists()){
                     System.out.println("ClamAV Doesn't exist");
                     Process initial = Runtime.getRuntime().exec("sudo clamStart.sh");
                 }
+                /*
                 System.out.println("Starting VirusCheck");
                 String filePath = "/UnknownFile/";
                 File fileExists = new File(filePath);
@@ -38,7 +42,7 @@ public class VirusChecker extends Checker{
                     filePath = "/home/";
                     fileExists = new File(filePath);
                 }
-                /*
+
                 System.out.println("File Exists");
                 String clam = "sudo clamscan -r ";
                 String command = clam.concat(filePath);
@@ -56,7 +60,7 @@ public class VirusChecker extends Checker{
 
                  */
                 List<String> clam = new ArrayList<String>();
-                clam.add("sudo"); clam.add("clamscan"); clam.add("-r"); clam.add(filePath);
+                clam.add("sudo"); clam.add("clamscan"); clam.add("-r"); clam.add("/");
                 ProcessBuilder cmd = new ProcessBuilder(clam);
                 cmd.redirectErrorStream(true);
                 Process process = cmd.start();
@@ -65,7 +69,7 @@ public class VirusChecker extends Checker{
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
                 String line = null;
-                while ((line = reader.readLine()) != null){
+                while ((line = reader.readLine()) != null && stop != true){
                     System.out.println(line);
                     this.controller.reportMsg(new Msg(Msg.DEBUG, "state", line, "VirusChecker"));
                     this.progress++;
@@ -78,7 +82,7 @@ public class VirusChecker extends Checker{
                 //in.close();
                 reader.close();
             } catch (Exception exc) {
-                System.out.println("exception");
+                System.out.println("Virus exception");
                 exc.printStackTrace();
             }
         };
@@ -88,6 +92,8 @@ public class VirusChecker extends Checker{
 
     @Override
     public void stop() {
+        stop = true;
+        System.out.println("Thread Stopped");
         //proc.wait();
     }
 

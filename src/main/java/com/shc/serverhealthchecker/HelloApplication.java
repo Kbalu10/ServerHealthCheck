@@ -11,6 +11,7 @@ import com.shc.serverhealthchecker.viruschecker.VirusCheckerView;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -21,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class HelloApplication extends Application {
-    protected SHCController controller;
+   protected SHCController controller;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -29,14 +30,15 @@ public class HelloApplication extends Application {
         //Branch Test Commit Stephen Kurtis, This is from the branch "StephenBranch"
         //Test Commit Alexander Sutter
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("scene1.fxml"));
-
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Parent root = fxmlLoader.load();
+        HelloController cont = fxmlLoader.getController();
+        cont.setHelloApp(this);
+        Scene scene = new Scene(root, 320, 240);
         stage.setTitle("Main Menu!");
         stage.setScene(scene);
-        HelloController cont = fxmlLoader.getController();
-        cont.setMain(this);
 
-        TextArea ta1 = new TextArea();
+
+/*        TextArea ta1 = new TextArea();
         ta1.setMaxWidth(200.0);
         ta1.setMaxHeight(200.0);
 
@@ -50,7 +52,7 @@ public class HelloApplication extends Application {
         this.controller.addChecker(pwdchecker);
         this.controller.addView(pwdview);
         this.controller.addChecker(viruschecker);
-        this.controller.addView(virusview);
+        this.controller.addView(virusview);*/
         stage.show();
 
         //SHOULD BE IMPROVED LATER
@@ -72,12 +74,21 @@ public class HelloApplication extends Application {
 
     }
 
-    public void startAllCheck() throws Exception{
+/*    public void startAllCheck() throws Exception{
         ArrayList<Checker> checkArr = controller.getCheckers();
         for(int i=0; i<checkArr.size(); i++) {
             checkArr.get(i).start();
         }
+        Thread.sleep(1000);
     }
+
+    public void stopAllCheck() throws Exception{
+        ArrayList<Checker> checkArr = controller.getCheckers();
+        for(int i=0; i<checkArr.size(); i++) {
+            checkArr.get(i).stop();
+        }
+    }*/
+
     public static void main(String[] args) {
         launch();
     }

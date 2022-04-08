@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 public class PwdChecker extends Checker{
 
     protected int progress = 0;
+    private boolean stop;
     Process proc = null;
 
     public PwdChecker(SHCController controller){
@@ -26,7 +27,7 @@ public class PwdChecker extends Checker{
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
                 String line;
-                while ((line = in.readLine()) != null) {
+                while ((line = in.readLine()) != null && !stop) {
                     System.out.println(line);
                     this.progress++;
                     this.controller.reportMsg(new Msg(Msg.DEBUG, "state", line, "PwdChecker"));
@@ -46,6 +47,8 @@ public class PwdChecker extends Checker{
 
     @Override
     public void stop() {
+        stop = true;
+        System.out.println("Thread Stopped");
         //proc.wait();
     }
 
