@@ -24,6 +24,8 @@ public class PwdChecker extends Checker{
             try {
                 Process pr = Runtime.getRuntime().exec("ls");
                 this.proc = pr;
+                Msg test1 = new Msg(1, "PWD CHECKER TEST PRINT", "PWD MSG TEST", "PWD Checker");
+                this.controller.reportMsg(test1);
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
                 String line;

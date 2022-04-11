@@ -1,8 +1,11 @@
 package com.shc.serverhealthchecker;
 
 
+import com.shc.serverhealthchecker.cfgchecker.CfgChecker;
 import com.shc.serverhealthchecker.model.Checker;
+import com.shc.serverhealthchecker.model.Msg;
 import com.shc.serverhealthchecker.model.SHCController;
+import com.shc.serverhealthchecker.model.SHCView;
 import com.shc.serverhealthchecker.pwdchecker.PwdChecker;
 import com.shc.serverhealthchecker.pwdchecker.PwdCheckerView;
 import com.shc.serverhealthchecker.viruschecker.VirusChecker;
@@ -14,10 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 
@@ -32,6 +32,11 @@ public class HelloController implements Initializable {
     @FXML
     private Stage stage;
     private Scene scene;
+    @FXML
+    private ProgressBar progressbar; //
+    @FXML
+    protected ArrayList<Checker> arrCheckers;//
+    protected ArrayList<SHCView> arrViews;  //
     @FXML
     private TextField filePath;
     @FXML
@@ -80,22 +85,84 @@ public class HelloController implements Initializable {
         scene = new Scene(fxmlLoader.load());
         stage.setTitle("Select tests");
         stage.setScene(scene);
+
+
         stage.show();
     }
     @FXML
-    protected void switchScene3(ActionEvent event) throws IOException{ //third user interface
+    protected void switchScene3(ActionEvent event/*boolean [] bSelected*/) throws IOException{ //third user interface
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("scene3.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setTitle("Results");
         stage.setScene(scene);
         stage.show();
+        //1. add the SELECTED checker
+        this.controller.clearAll();
+        /*
+        Checker [] arrCheckers = new Checker [] {
+                new PwdChecker(this.controller),
+                new CfgChecker(this.controller),
+                new VirusChecker(this.controller),
+
+        };
+        for(int i=0; i<bSelected.length; i++) {
+            if(bSelected[i]) {
+                this.controller.addChecker(arrCheckers[i]);
+            }
+        }
+        */
+
+        //2. add the views
+        TextArea t1 = (TextArea) scene.lookup("#txtArea1");
+        WarnView warnview = new WarnView(t1);
+        this.controller.addView(warnview);
+
+        //progressbar view
+
+
         try {
             startAllCheck();
             stopAllCheck();// Remove Later
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+/*
+    @FXML
+    protected void switchScene3_1(ActionEvent event, boolean [] bSelected) throws IOException { //pwdchecker
+       switchScene_worker(event, new boolean [] {true, false, false});
+    }
+
+    @FXML
+    protected void switchScene3_2(ActionEvent event, boolean [] bSelected) throws IOException { //configchecker
+        switchScene_worker(event, new boolean [] {false, true, false});
+    }
+
+    @FXML
+    protected void switchScene3_3(ActionEvent event, boolean [] bSelected) throws IOException { //virusScan
+        switchScene_worker(event, new boolean [] {false, false, true});
+    }
+
+    @FXML
+    protected void switchScene3_4(ActionEvent event, boolean [] bSelected) throws IOException { //Full system sacn
+        switchScene_worker(event, new boolean [] {true, true, true});
+    }
+
+    //GUI receive message from checkers
+    //send messages from checkers to views
+    @FXML
+    protected void addCheckers(Checker pwdChecker, Checker virusChecker, Checker configChecker) throws IOException{ //register checkers with controller?
+        arrCheckers.add(pwdChecker);
+        arrCheckers.add(virusChecker);
+        arrCheckers.add(configChecker);
+
+        //implement controller.report
+    }
+*/
+    @FXML
+    protected ArrayList<SHCView> getViews(SHCView view) throws IOException{  //dispatch WARNING and ERROR to dialog box1(area1) and dialog box2(area2)
+       return this.arrViews;
     }
 
     @FXML
@@ -130,7 +197,7 @@ public class HelloController implements Initializable {
 
 
     public void startAllCheck() throws Exception{
-        ArrayList<Checker> checkArr = controller.getCheckers();
+       ArrayList<Checker> checkArr = controller.getCheckers();
         for(int i=0; i<checkArr.size(); i++) {
             checkArr.get(i).start();
         }

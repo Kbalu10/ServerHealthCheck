@@ -1,21 +1,21 @@
-package com.shc.serverhealthchecker.pwdchecker;
+package com.shc.serverhealthchecker;
 
 import com.shc.serverhealthchecker.model.Msg;
 import com.shc.serverhealthchecker.model.SHCView;
 import javafx.scene.control.TextArea;
 
-public class PwdCheckerView extends SHCView {
+/** this view ONLY takes warning messeage! */
+public class WarnView extends SHCView {
     protected TextArea ta;
 
-    public PwdCheckerView(TextArea ta){
+    public WarnView(javafx.scene.control.TextArea ta){
         this.ta = ta;
     }
     @Override
     public void displayMsg(Msg msg) {
-        if (msg.submitter == "PWD Checker") {
+        if (msg.level<=Msg.WARN) {
             String line = msg.submitter + ": " + msg.title;
             this.ta.setText(this.ta.getText() + "\n" + line);
         }
     }
-
 }

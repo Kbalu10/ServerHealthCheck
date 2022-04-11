@@ -13,6 +13,11 @@ public class SHCController {
           view.displayMsg(msg);
       }
     }
+
+    public void clearAll(){
+        this.arrCheckers.clear();
+        this.arrViews.clear();
+    }
     public void addChecker(Checker checker){
        this.arrCheckers.add(checker);
     }
