@@ -12,11 +12,8 @@ public class CfgCheckerView extends SHCView{
         }
         @Override
         public void displayMsg(Msg msg) {
-            if (msg.submitter == "CFG Checker"){
-                String line = msg.submitter + ": " + msg.title + ": " + msg.details;
+                String line = msg.submitter + ": " + msg.title;
                 this.ta.setText(this.ta.getText() + "\n" + line);
-            }
-
         }
 
     }

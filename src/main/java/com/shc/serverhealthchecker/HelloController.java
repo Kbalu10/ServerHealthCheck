@@ -1,7 +1,7 @@
 package com.shc.serverhealthchecker;
 
 
-import com.shc.serverhealthchecker.cfgchecker.CfgChecker;
+
 import com.shc.serverhealthchecker.model.Checker;
 import com.shc.serverhealthchecker.model.Msg;
 import com.shc.serverhealthchecker.model.SHCController;
@@ -10,6 +10,8 @@ import com.shc.serverhealthchecker.pwdchecker.PwdChecker;
 import com.shc.serverhealthchecker.pwdchecker.PwdCheckerView;
 import com.shc.serverhealthchecker.viruschecker.VirusChecker;
 import com.shc.serverhealthchecker.viruschecker.VirusCheckerView;
+import com.shc.serverhealthchecker.cfgchecker.CfgChecker;
+import com.shc.serverhealthchecker.cfgchecker.CfgCheckerView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,10 +64,14 @@ public class HelloController implements Initializable {
         PwdCheckerView pwdview = new PwdCheckerView(ta1);
         VirusChecker viruschecker = new VirusChecker(controller);
         VirusCheckerView virusview = new VirusCheckerView(ta1);
+        CfgChecker cfgchecker = new CfgChecker(controller);
+        CfgCheckerView cfgview = new CfgCheckerView(ta1);
         this.controller.addChecker(pwdchecker);
         this.controller.addView(pwdview);
         this.controller.addChecker(viruschecker);
         this.controller.addView(virusview);
+        this.controller.addChecker(cfgchecker);
+        this.controller.addView(cfgview);
     }
 
     @FXML
@@ -98,7 +104,7 @@ public class HelloController implements Initializable {
         stage.setScene(scene);
         stage.show();
         //1. add the SELECTED checker
-        this.controller.clearAll();
+        //this.controller.clearAll();
         /*
         Checker [] arrCheckers = new Checker [] {
                 new PwdChecker(this.controller),
@@ -197,7 +203,7 @@ public class HelloController implements Initializable {
 
 
     public void startAllCheck() throws Exception{
-       ArrayList<Checker> checkArr = controller.getCheckers();
+        ArrayList<Checker> checkArr = controller.getCheckers();
         for(int i=0; i<checkArr.size(); i++) {
             checkArr.get(i).start();
         }

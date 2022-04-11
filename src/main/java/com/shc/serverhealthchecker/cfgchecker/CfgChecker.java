@@ -27,12 +27,13 @@ public class CfgChecker extends Checker {
 
     @Override
     public void start() {
+        System.out.println("CFG");
         Runnable runnable = () ->
         {
             try {
                 Process pr = Runtime.getRuntime().exec("echo ConfigCheck");
                 this.proc = pr;
-                BufferedReader reader = new BufferedReader(new FileReader("/home/u/Downloads/configfilepaths.txt"));
+                BufferedReader reader = new BufferedReader(new FileReader("external/CFGPaths"));
                 String line = reader.readLine();
                 while (line != null) {
                     Path path = Paths.get(line);
