@@ -71,7 +71,7 @@ public class VirusChecker extends Checker{
                 String line = null;
                 while ((line = reader.readLine()) != null && stop != true){
                     System.out.println(line);
-                    this.controller.reportMsg(new Msg(Msg.DEBUG, "state", line, "VirusChecker"));
+                    this.controller.reportMsg(new Msg(1, "state", line, "VirusChecker"));
                     this.progress++;
                 }
 

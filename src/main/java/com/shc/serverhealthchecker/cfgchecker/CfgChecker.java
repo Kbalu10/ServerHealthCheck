@@ -19,6 +19,7 @@ import java.nio.file.attribute.UserPrincipal;
 public class CfgChecker extends Checker {
 
     protected int progress = 0;
+    private boolean stop;
     Process proc = null;
 
     public CfgChecker(SHCController controller) {
@@ -31,6 +32,7 @@ public class CfgChecker extends Checker {
         Runnable runnable = () ->
         {
             try {
+                stop = false;
                 Process pr = Runtime.getRuntime().exec("echo ConfigCheck");
                 this.proc = pr;
                 BufferedReader reader = new BufferedReader(new FileReader("external/CFGPaths"));
@@ -67,7 +69,8 @@ public class CfgChecker extends Checker {
 
     @Override
     public void stop() {
-
+            stop = true;
+            System.out.println("Thread Stopped");
     }
 
     @Override

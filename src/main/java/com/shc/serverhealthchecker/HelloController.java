@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -62,16 +63,16 @@ public class HelloController implements Initializable {
         this.controller = new SHCController();
         PwdChecker pwdchecker = new PwdChecker(controller);
         PwdCheckerView pwdview = new PwdCheckerView(ta1);
-        VirusChecker viruschecker = new VirusChecker(controller);
-        VirusCheckerView virusview = new VirusCheckerView(ta1);
         CfgChecker cfgchecker = new CfgChecker(controller);
         CfgCheckerView cfgview = new CfgCheckerView(ta1);
+        VirusChecker viruschecker = new VirusChecker(controller);
+        VirusCheckerView virusview = new VirusCheckerView(ta1);
         this.controller.addChecker(pwdchecker);
         this.controller.addView(pwdview);
-        this.controller.addChecker(viruschecker);
-        this.controller.addView(virusview);
         this.controller.addChecker(cfgchecker);
         this.controller.addView(cfgview);
+        this.controller.addChecker(viruschecker);
+        this.controller.addView(virusview);
     }
 
     @FXML
@@ -96,13 +97,20 @@ public class HelloController implements Initializable {
         stage.show();
     }
     @FXML
-    protected void switchScene3(ActionEvent event/*boolean [] bSelected*/) throws IOException{ //third user interface
+    protected void switchScene3(ActionEvent event/*, boolean [] bSelected*/) throws Exception { //third user interface
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("scene3.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setTitle("Results");
         stage.setScene(scene);
         stage.show();
+        /*Object bType = event.getSource();
+        Button b = (Button)bType;
+        System.out.println(b.getId());*/
+
+        Node node = (Node) event.getSource();
+        String id = node.getId();
+
         //1. add the SELECTED checker
         //this.controller.clearAll();
         /*
@@ -126,53 +134,79 @@ public class HelloController implements Initializable {
 
         //progressbar view
 
+        if(Objects.equals(id, "pwdCheckBtn")){
+            System.out.println("PASSWORD");
+            startSingleCheck(0);
+        }
+        if(Objects.equals(id, "cfgCheckBtn")){
+            startSingleCheck(1);
+        }
+        if(Objects.equals(id, "virusCheckBtn")){
+            startSingleCheck(2);
+        }
+        if(Objects.equals(id, "fullCheckBtn")) {
+            try {
+                startAllCheck();
+                stopAllCheck();// Remove Later
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
+/*
         try {
             startAllCheck();
             stopAllCheck();// Remove Later
         } catch (Exception e) {
             e.printStackTrace();
         }
+*/
     }
+
 /*
-    @FXML
-    protected void switchScene3_1(ActionEvent event, boolean [] bSelected) throws IOException { //pwdchecker
-       switchScene_worker(event, new boolean [] {true, false, false});
+
+    public void switchScene3_1(ActionEvent event) throws IOException { //pwdchecker
+        switchScene_worker(event, new boolean [] {true, false, false});
     }
 
     @FXML
-    protected void switchScene3_2(ActionEvent event, boolean [] bSelected) throws IOException { //configchecker
+    protected void switchScene3_2(ActionEvent event) throws IOException { //configchecker
         switchScene_worker(event, new boolean [] {false, true, false});
     }
 
     @FXML
-    protected void switchScene3_3(ActionEvent event, boolean [] bSelected) throws IOException { //virusScan
+    protected void switchScene3_3(ActionEvent event) throws IOException { //virusScan
         switchScene_worker(event, new boolean [] {false, false, true});
     }
 
     @FXML
-    protected void switchScene3_4(ActionEvent event, boolean [] bSelected) throws IOException { //Full system sacn
+    protected void switchScene3_4(ActionEvent event) throws IOException { //Full system sacn
         switchScene_worker(event, new boolean [] {true, true, true});
     }
 
-    //GUI receive message from checkers
-    //send messages from checkers to views
-    @FXML
-    protected void addCheckers(Checker pwdChecker, Checker virusChecker, Checker configChecker) throws IOException{ //register checkers with controller?
-        arrCheckers.add(pwdChecker);
-        arrCheckers.add(virusChecker);
-        arrCheckers.add(configChecker);
-
-        //implement controller.report
+    private void switchScene_worker(ActionEvent event, boolean[] booleans) {
     }
 */
+
+    /*
+        //GUI receive message from checkers
+        //send messages from checkers to views
+        @FXML
+        protected void addCheckers(Checker pwdChecker, Checker virusChecker, Checker configChecker) throws IOException{ //register checkers with controller?
+            arrCheckers.add(pwdChecker);
+            arrCheckers.add(virusChecker);
+            arrCheckers.add(configChecker);
+    
+            //implement controller.report
+        }
+    */
     @FXML
     protected ArrayList<SHCView> getViews(SHCView view) throws IOException{  //dispatch WARNING and ERROR to dialog box1(area1) and dialog box2(area2)
        return this.arrViews;
     }
 
     @FXML
-    protected void switchVirusPath(ActionEvent event) throws IOException{
+    protected void switchVirusPath(ActionEvent event) throws IOException{ //Scene for VirusPathCheck
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("virusPath.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
@@ -216,4 +250,16 @@ public class HelloController implements Initializable {
             checkArr.get(i).stop();
         }
     }
+
+    public void startSingleCheck(int checkType) throws Exception{
+        ArrayList<Checker> checkArr = controller.getCheckers();
+        checkArr.get(checkType).start();
+        //Thread.sleep(1000); //For Debugging Remove Later
+    }
+    public void stopSingleCheck(int checkType) throws Exception{
+        ArrayList<Checker> checkArr = controller.getCheckers();
+        checkArr.get(checkType).stop();
+        //Thread.sleep(1000); //For Debugging Remove Later
+    }
+
 }
