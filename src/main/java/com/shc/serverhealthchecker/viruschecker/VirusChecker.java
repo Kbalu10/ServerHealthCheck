@@ -14,6 +14,7 @@ import java.util.List;
 public class VirusChecker extends Checker{
 
     protected int progress = 0;
+    protected VirusChecker myself = this; //
     private boolean stop;
     Process proc = null;
 
@@ -42,7 +43,6 @@ public class VirusChecker extends Checker{
                     filePath = "/home/";
                     fileExists = new File(filePath);
                 }
-
                 System.out.println("File Exists");
                 String clam = "sudo clamscan -r ";
                 String command = clam.concat(filePath);
@@ -57,7 +57,6 @@ public class VirusChecker extends Checker{
                     this.progress++;
                     this.controller.reportMsg(new Msg(Msg.DEBUG, "state", line, "VirusChecker"));
                 }
-
                  */
                 List<String> clam = new ArrayList<String>();
                 clam.add("sudo"); clam.add("clamscan"); clam.add("-r"); clam.add("/");
@@ -72,11 +71,16 @@ public class VirusChecker extends Checker{
                 while ((line = reader.readLine()) != null && stop != true){
                     System.out.println(line);
                     this.controller.reportMsg(new Msg(1, "state", line, "VirusChecker"));
-                    this.progress++;
+                    myself.progress++; //
+                    if(line.indexOf("ERROR")>=0){ //
+                        this.controller.reportMsg(new Msg(Msg.ERROR, "state", line, "VirusChecker"));
+                    }else{
+                        this.controller.reportMsg(new Msg(Msg.WARN, "state", line, "VirusChecker"));
+                    }
                 }
 
                 process.waitFor();
-                this.progress = 100;
+                myself.progress = 100; //
                 System.out.println("ok!");
 
                 //in.close();

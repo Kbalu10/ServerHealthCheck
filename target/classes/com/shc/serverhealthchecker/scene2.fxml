@@ -11,14 +11,14 @@
     </padding>
     <children>
         <Button alignment="TOP_LEFT" onAction="#switchScene1" text="Back" />
-        <Label layoutX="171.0" layoutY="37.0" prefHeight="57.0" prefWidth="160.0" text="Select a test" textAlignment="CENTER">
+        <Label alignment="CENTER" layoutX="171.0" layoutY="37.0" prefHeight="57.0" prefWidth="160.0" text="Select a test" textAlignment="CENTER">
             <font>
                 <Font size="22.0" />
             </font>
         </Label>
-        <Button layoutX="160.0" layoutY="106.0" onAction="#switchScene3" text="Password Security Check" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Button layoutX="178.0" layoutY="147.0" onAction="#switchScene3" text="Config File Check" />
-        <Button layoutX="185.0" layoutY="190.0" onAction="#switchVirusPath" text="Anti-virus Scan" GridPane.rowIndex="3" />
-        <Button layoutX="178.0" layoutY="230.0" onAction="#switchScene3" text="Full System Scan" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Button id="pwdCheckBtn" layoutX="160.0" layoutY="106.0" onAction="#switchScene3" text="Password Security Check" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Button id="cfgCheckBtn" layoutX="178.0" layoutY="147.0" onAction="#switchScene3" text="Config File Check" />
+        <Button id="virusCheckBtn" layoutX="185.0" layoutY="190.0" onAction="#switchVirusPath" text="Anti-virus Scan" GridPane.rowIndex="3" />
+        <Button id="fullCheckBtn" layoutX="178.0" layoutY="230.0" onAction="#switchScene3" text="Full System Scan" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     </children>
 </AnchorPane>

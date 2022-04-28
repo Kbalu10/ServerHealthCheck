@@ -15,20 +15,24 @@
             <Font size="18.0" />
         </font>
     </Label>
-    <ProgressBar layoutX="409.0" layoutY="76.0" prefWidth="200.0" />
+    <ProgressBar fx:id="progressbar1" layoutX="409.0" layoutY="76.0" prefWidth="200.0" progress="0.0" />
     <ScrollPane layoutX="21.0" layoutY="66.0" prefHeight="152.0" prefWidth="350.0">
-      <content>
-         <TextArea id="txtArea1" prefHeight="197.0" prefWidth="190.0" />
-      </content>
+        <content>
+            <TextArea id="txtArea1" prefHeight="151.0" prefWidth="327.0" wrapText="true" />
+        </content>
     </ScrollPane>
     <Label layoutX="64.0" layoutY="47.0" text="Warnings" />
     <Label layoutX="77.0" layoutY="248.0" text="Errors" />
     <ScrollPane layoutX="22.0" layoutY="264.0" prefHeight="152.0" prefWidth="350.0">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="346.0">
             <Label layoutX="52.0" layoutY="192.0" text="Label" />
+            <TextArea id="txtArea2" prefHeight="143.0" prefWidth="326.0" wrapText="true" />
         </AnchorPane>
     </ScrollPane>
-    <ProgressBar layoutX="409.0" layoutY="132.0" prefWidth="200.0" />
-    <ProgressBar layoutX="409.0" layoutY="188.0" prefWidth="200.0" />
-    <ProgressBar layoutX="409.0" layoutY="254.0" prefWidth="200.0" />
+    <ProgressBar fx:id="progressbar2" layoutX="409.0" layoutY="132.0" prefWidth="200.0" progress="0.0" />
+    <ProgressBar fx:id="progressbar3" layoutX="409.0" layoutY="188.0" prefWidth="200.0" progress="0.0" />
+   <Label layoutX="413.0" layoutY="96.0" />
+   <Label layoutX="413.0" layoutY="152.0" />
+   <Label layoutX="413.0" layoutY="210.0" />
+   <Label layoutX="413.0" layoutY="274.0" />
 </AnchorPane>

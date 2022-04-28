@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.Button?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.shc.serverhealthchecker.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Text text="Linux Health Checker" />
-    <Button text="Run a single test" onAction="#switchScene2"/>
-    <Button text="Run a full system test" onAction="#switchScene3"/>
-
-</VBox>
+<AnchorPane prefHeight="268.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shc.serverhealthchecker.HelloController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <Label alignment="CENTER" layoutX="110.0" layoutY="56.0" prefHeight="26.0" prefWidth="274.0" text="Linux Health Checker">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button layoutX="169.0" layoutY="122.0" mnemonicParsing="false" onAction="#switchScene2" prefHeight="14.0" prefWidth="140.0" text="Run a test" />
+   </children>
+</AnchorPane>

@@ -4,6 +4,7 @@ public class Msg {
     public static final int SEVERE = 0;
     public static final int WARN = 1;
     public static final int DEBUG = 2;
+    public static final int ERROR = 3; //
 
     public int level;
     public String title;

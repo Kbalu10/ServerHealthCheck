@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 public class PwdChecker extends Checker{
 
     protected int progress = 0;
+    protected PwdChecker myself = this;
     private boolean stop;
     Process proc = null;
 
@@ -31,11 +32,15 @@ public class PwdChecker extends Checker{
                 String line;
                 while ((line = in.readLine()) != null && !stop) {
                     System.out.println(line);
-                    this.progress++;
-                    this.controller.reportMsg(new Msg(Msg.DEBUG, "state", line, "PwdChecker"));
+                    myself.progress++; //
+                    if(line.indexOf("ERROR")>=0){ //
+                        this.controller.reportMsg(new Msg(Msg.ERROR, "state", line, "PwdChecker"));
+                    }else{
+                        this.controller.reportMsg(new Msg(Msg.WARN, "state", line, "PwdChecker"));
+                    }
                 }
                 pr.waitFor();
-                this.progress = 100;
+                myself.progress = 100; //
                 System.out.println("ok!");
 
                 in.close();
