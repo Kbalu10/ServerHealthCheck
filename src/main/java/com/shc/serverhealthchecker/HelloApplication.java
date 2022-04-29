@@ -33,7 +33,7 @@ public class HelloApplication extends Application {
         Parent root = fxmlLoader.load();
         HelloController cont = fxmlLoader.getController();
         cont.setHelloApp(this);
-        Scene scene = new Scene(root, 320, 240);
+        Scene scene = new Scene(root, 485, 268);
         stage.setTitle("Main Menu!");
         stage.setScene(scene);
 
