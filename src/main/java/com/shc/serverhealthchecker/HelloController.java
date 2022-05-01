@@ -49,7 +49,7 @@ public class HelloController implements Initializable {
     @FXML
     private TextField filePath;
     @FXML
-    private Button VirusStartBtn;
+    private Button virusCheckBtn;
     @FXML
     private Label pathErrorLbl;
 
@@ -159,7 +159,7 @@ public class HelloController implements Initializable {
                 progress(progressbar2,this.controller.getCheckers().get(1));
                 progress(progressbar3,this.controller.getCheckers().get(2));
                 //progress(progressbar4, null); //TO FIX LATER
-                stopAllCheck();// Remove Later
+                //stopAllCheck();// Remove Later
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -234,8 +234,9 @@ public class HelloController implements Initializable {
     @FXML
     void pathCheck(ActionEvent event){
         if(!(filePath.getText()).isEmpty() && pathExists(filePath.getText())){
-            VirusStartBtn.setVisible(true);
+            virusCheckBtn.setVisible(true);
             pathErrorLbl.setText("");
+            VirusChecker.scanPath = filePath.getText();
         }
         else if(!pathExists(filePath.getText())){
             pathErrorLbl.setText("Error: File Path doesn't exist");
@@ -252,7 +253,7 @@ public class HelloController implements Initializable {
         for(int i=0; i<checkArr.size(); i++) {
             checkArr.get(i).start();
         }
-        Thread.sleep(1000); //For Debugging Remove Later
+        //Thread.sleep(1000); //For Debugging Remove Later
     }
 
     public void stopAllCheck() {

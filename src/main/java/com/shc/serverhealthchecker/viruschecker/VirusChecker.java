@@ -17,7 +17,7 @@ public class VirusChecker extends Checker{
     protected VirusChecker myself = this; //
     private boolean stop;
     Process proc = null;
-
+    public static String scanPath = "/";
 
     public VirusChecker(SHCController controller){
         super(controller);
@@ -59,7 +59,8 @@ public class VirusChecker extends Checker{
                 }
                  */
                 List<String> clam = new ArrayList<String>();
-                clam.add("sudo"); clam.add("clamscan"); clam.add("-r"); clam.add("/");
+                clam.add("sudo"); clam.add("clamscan"); clam.add("-r"); clam.add(scanPath);
+                System.out.println("Scanning "+scanPath);
                 ProcessBuilder cmd = new ProcessBuilder(clam);
                 cmd.redirectErrorStream(true);
                 Process process = cmd.start();
@@ -70,7 +71,7 @@ public class VirusChecker extends Checker{
                 String line = null;
                 while ((line = reader.readLine()) != null && stop != true){
                     System.out.println(line);
-                    this.controller.reportMsg(new Msg(1, "state", line, "VirusChecker"));
+                    //this.controller.reportMsg(new Msg(Msg.WARN, "state", line, "VirusChecker"));
                     myself.progress++; //
                     if(line.indexOf("ERROR")>=0){ //
                         this.controller.reportMsg(new Msg(Msg.ERROR, "state", line, "VirusChecker"));

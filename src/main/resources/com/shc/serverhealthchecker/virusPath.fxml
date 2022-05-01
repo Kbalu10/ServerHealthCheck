@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shc.serverhealthchecker.HelloController">
    <children>
-      <Button fx:id="VirusStartBtn" layoutX="275.0" layoutY="252.0" mnemonicParsing="false" onAction="#switchScene3" text="Start" visible="false" />
+      <Button fx:id="virusCheckBtn" layoutX="275.0" layoutY="252.0" mnemonicParsing="false" onAction="#switchScene3" text="Start" visible="false" />
       <TextField fx:id="filePath" layoutX="172.0" layoutY="200.0" />
       <Label layoutX="218.0" layoutY="170.0" text="Choose Directory to Scan" textAlignment="CENTER" />
       <Label layoutX="150.0" layoutY="73.0" text="VirusCheck Scan" textAlignment="CENTER">
@@ -16,6 +16,6 @@
       </Label>
       <Button alignment="TOP_LEFT" layoutY="2.0" mnemonicParsing="false" onAction="#switchScene2" text="Back" />
       <Label fx:id="pathErrorLbl" layoutX="282.0" layoutY="224.0" />
-      <Button onAction="#pathCheck" layoutX="353.0" layoutY="200.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="60.0" text="Check" />
+      <Button  onAction="#pathCheck" layoutX="353.0" layoutY="200.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="60.0" text="Check" />
    </children>
 </AnchorPane>
