@@ -67,7 +67,7 @@ public class CfgChecker extends Checker {
                             String filename = String.valueOf(path);
                             File filet = new File(filename);
                             long lastmodded = filet.lastModified();
-                            String modString = path + " has been modified within the last 24 hours. Last Modified: " + attr.lastModifiedTime();
+                            String modString = path + " has been modified within the last 24 hours.\nLast Modified: " + attr.lastModifiedTime();
                             if (lastmodded > System.currentTimeMillis() - 86400000) {
                                 Msg modMsg = new Msg(1, "File Modified", modString, "CFG Checker");
                                 this.controller.reportMsg(modMsg);
@@ -78,9 +78,9 @@ public class CfgChecker extends Checker {
                     }
                     //Reports message that file path is invalid
                     else{
-                        System.out.println("BAD PATHBAD PATHBAD PATHBAD PATHBAD PATHBAD PATHBAD PATHBAD PATHBAD PATHBAD PATHBAD PATHBAD PATHBAD PATH");
-                        String invalidPath = path + " Does not exist";
-                        Msg noPath = new Msg(1, "Invalid File Path", invalidPath, "CFG Checker");
+                        String invalidPath = "'" + path + "' Does not exist";
+                        Msg noPath = new Msg(3, "Invalid File Path", invalidPath, "CFG Checker");
+                        this.controller.reportMsg(noPath);
                     }
                         line = reader.readLine();
                     }
