@@ -31,8 +31,29 @@ public class VirusChecker extends Checker{
                 stop = false;
                 File tempFile = new File("/usr/local/bin/clamscan");
                 if(!tempFile.exists()){
-                    System.out.println("ClamAV Doesn't exist");
-                    Process initial = Runtime.getRuntime().exec("sudo clamStart.sh");
+                    try {
+                        System.out.println("ClamAV Doesn't exist");
+                        //proc = Runtime.getRuntime().exec("sudo ./external/clamStart.sh");
+                        ProcessBuilder inst = new ProcessBuilder();
+                        inst.command("sudo", "./external/clamStart.sh");
+                        inst.redirectErrorStream(true);
+                        Process process = inst.start();
+                        this.proc = process;
+                        InputStream inS = process.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inS));
+
+                        String line1 = null;
+                        while ((line1 = reader.readLine()) != null && stop != true){
+                            System.out.println(line1);
+                        }
+
+                        process.waitFor();
+
+                        System.out.println("ok!");
+
+                        //in.close();
+                        reader.close();
+                    }catch(Exception e) {e.printStackTrace();}
                 }
                 /*
                 System.out.println("Starting VirusCheck");
