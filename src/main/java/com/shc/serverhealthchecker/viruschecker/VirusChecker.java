@@ -35,7 +35,7 @@ public class VirusChecker extends Checker{
                         System.out.println("ClamAV Doesn't exist");
                         //proc = Runtime.getRuntime().exec("sudo ./external/clamStart.sh");
                         ProcessBuilder inst = new ProcessBuilder();
-                        inst.command("sudo", "./external/clamStart.sh");
+                        inst.command("sudo", "./external/clamStart.sh", "-s");
                         inst.redirectErrorStream(true);
                         Process process = inst.start();
                         this.proc = process;
@@ -55,18 +55,10 @@ public class VirusChecker extends Checker{
                         reader.close();
                     }catch(Exception e) {e.printStackTrace();}
                 }
-                /*
+/*
                 System.out.println("Starting VirusCheck");
-                String filePath = "/UnknownFile/";
-                File fileExists = new File(filePath);
-                while(!fileExists.exists()){
-                    System.out.println(filePath+": Path doesnt exist");
-                    filePath = "/home/";
-                    fileExists = new File(filePath);
-                }
-                System.out.println("File Exists");
                 String clam = "sudo clamscan -r ";
-                String command = clam.concat(filePath);
+                String command = clam.concat(scanPath);
                 //Process fresh = Runtime.getRuntime().exec("sudo freshclam");
                 //this.proc = fresh;
                 Process pr = Runtime.getRuntime().exec(command);
@@ -76,9 +68,9 @@ public class VirusChecker extends Checker{
                 while ((line = in.readLine()) != null) {
                     System.out.println(line);
                     this.progress++;
-                    this.controller.reportMsg(new Msg(Msg.DEBUG, "state", line, "VirusChecker"));
+                    this.controller.reportMsg(new Msg(Msg.WARN, "state", line, "VirusChecker"));
                 }
-                 */
+*/
                 List<String> clam = new ArrayList<String>();
                 clam.add("sudo"); clam.add("clamscan"); clam.add("-r"); clam.add(scanPath);
                 System.out.println("Scanning "+scanPath);
@@ -101,7 +93,9 @@ public class VirusChecker extends Checker{
                     }
                 }
 
-                process.waitFor();
+
+                //process.waitFor();
+                proc.waitFor();
                 myself.progress = 100; //
                 System.out.println("ok!");
 
