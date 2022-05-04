@@ -36,11 +36,15 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
     @FXML
+    public TextArea txtArea1;
+    @FXML
+    public TextArea txtArea2;
+    @FXML
     private Stage stage;
     private Scene scene;
     @FXML
-    private TextArea textArea; //
-    private TextArea textArea1; //
+    private TextArea textArea = new TextArea(); //
+    private TextArea textArea1 = new TextArea(); //
     @FXML
     private Task task; //
     @FXML
@@ -124,6 +128,7 @@ public class HelloController implements Initializable {
         }
 */
         //Warning, Error view
+
         textArea = (TextArea) scene.lookup("#txtArea1");
         WarnView warnview = new WarnView(textArea);
         this.controller.addView(warnview);
@@ -132,6 +137,13 @@ public class HelloController implements Initializable {
         ErrorView errorview = new ErrorView(textArea1);
         this.controller.addView(errorview);
 
+        /*
+        WarnView warnview = new WarnView(txtArea1);
+        this.controller.addView(warnview);
+
+        ErrorView errorview = new ErrorView(txtArea2);
+        this.controller.addView(errorview);
+ */
         //progressbar view
         ProgressBar progressbar1 = (ProgressBar) scene.lookup("#progressbar1");
         ProgressBar progressbar2 = (ProgressBar) scene.lookup("#progressbar2");
@@ -273,4 +285,6 @@ public class HelloController implements Initializable {
         checkArr.get(checkType).stop();
         //Thread.sleep(1000); //For Debugging Remove Later
     }
+
+
 }
