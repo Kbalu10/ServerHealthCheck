@@ -15,7 +15,7 @@ public class ErrorView extends SHCView  {
     public void displayMsg(Msg msg) {
         if (msg.level>=Msg.ERROR) {
             String line = "[" + msg.submitter + "] " + msg.title + ":\n" + msg.details + "\n";
-            this.ta1.appendText(this.ta1.getText() + "\n" + line);
+            this.ta1.appendText(line+'\n');
         }
     }
 }
