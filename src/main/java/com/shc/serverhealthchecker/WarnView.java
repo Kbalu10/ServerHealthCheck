@@ -16,7 +16,7 @@ public class WarnView extends SHCView {
 
     @Override
     public void displayMsg(Msg msg) {
-        if (msg.level >= Msg.WARN) {
+        if (msg.level == Msg.WARN) {
             String line = "[" + msg.submitter + "] " + msg.title + ":\n" + msg.details + "\n";
            // String oldText = this.ta1.getText();
            // String newText = oldText + "\n" + line;

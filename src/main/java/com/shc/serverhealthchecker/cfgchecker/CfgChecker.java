@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileOwnerAttributeView;
 import java.nio.file.attribute.UserPrincipal;
+import java.sql.*;
 
 
 public class CfgChecker extends Checker {
@@ -39,6 +40,36 @@ public class CfgChecker extends Checker {
                 this.proc = pr;
                 BufferedReader reader = new BufferedReader(new FileReader("external/CFGPaths"));
                 String line = reader.readLine();
+
+                //Reads hashed passwords from mysql user database and sends message if default hashing method is used or no password
+                try {
+                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "root");
+                    Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery("select * from user");
+                    //String hashingMSG = ""
+                    //Msg sqlPass = new Msg(1, "MySQL Hashing", hashingMSG, "CFG Checker");
+                    while (resultSet.next()) {
+                        String password = resultSet.getString("authentication_string");
+                        String user = resultSet.getString("user");
+                        //System.out.println(user + ": " + password);
+
+                        if (password.isEmpty()) {
+                            //System.out.println("Blank");
+                            String emptyPassStr = user + ": has no password set!";
+                            Msg emptyPass = new Msg(3, "Empty MySQL Password", emptyPassStr, "CFG Checker");
+                            this.controller.reportMsg(emptyPass);
+                        } else if (password.charAt(0) == '*') {
+                            //System.out.println("Password is default dumbo");
+                            String hashPass = user + ": is using the default(weak) hashing method on their password!";
+                            Msg defaultHash = new Msg(1, "Weak MySQL Hashing", hashPass, "CFG Checker");
+                            this.controller.reportMsg(defaultHash);
+                        }
+
+
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
                 //parses CFGPaths file which contains important CFG file paths
                 while (line != null) {
