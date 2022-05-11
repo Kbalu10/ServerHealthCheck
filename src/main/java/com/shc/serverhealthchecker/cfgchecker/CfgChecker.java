@@ -69,6 +69,7 @@ public class CfgChecker extends Checker {
                     }
                 }catch (Exception e){
                     e.printStackTrace();
+                    System.out.println("Invalid MySQL Root Password");
                 }
 
                 //parses CFGPaths file which contains important CFG file paths
