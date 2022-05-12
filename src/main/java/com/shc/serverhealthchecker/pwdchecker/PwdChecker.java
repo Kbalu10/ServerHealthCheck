@@ -35,19 +35,20 @@ public class PwdChecker extends Checker{
                 PrintWriter pw = new PrintWriter(fw);
 
                 while ((line = in.readLine()) != null && !stop) {
-                    //System.out.println(line);
+                    System.out.println(line);
                     pw.println(line);
                     myself.progress++; //
                 }
                 pw.close();
-                proc.waitFor();
+                //proc.waitFor();
 
 
                 Process pr2 = Runtime.getRuntime().exec("john --wordlist=/home/u/Downloads/rockyou.txt unshadowed.txt");
+                //Process pr2 = Runtime.getRuntime().exec("john --single unshadowed.txt");
                 this.proc = pr2;
                 BufferedReader in2 = new BufferedReader(new InputStreamReader(pr2.getInputStream()));
                 while ((line = in2.readLine()) != null && !stop) {
-                    //System.out.println(line);
+                    System.out.println(line);
                     if(line.indexOf("ERROR")>=0){ //
                         this.controller.reportMsg(new Msg(Msg.ERROR, "Cracking", line, "PDWChecker"));
                     }else{
@@ -60,7 +61,7 @@ public class PwdChecker extends Checker{
                 this.proc = pr3;
                 BufferedReader in3 = new BufferedReader(new InputStreamReader(pr3.getInputStream()));
                 while ((line = in3.readLine()) != null && !stop) {
-                    //System.out.println(line);
+                    System.out.println(line);
                     if(!line.isEmpty()){
                         if(line.indexOf("ERROR")>=0){ //
                             this.controller.reportMsg(new Msg(Msg.ERROR, "Cracked Password", line, "PWDChecker"));
