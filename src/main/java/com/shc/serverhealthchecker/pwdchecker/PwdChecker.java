@@ -19,6 +19,7 @@ public class PwdChecker extends Checker{
 
     @Override
     public void start() {
+        this.controller.reportMsg(new Msg(Msg.WARN, "Starting", "Starting Password Checker" , "PDWChecker"));
         Runnable runnable = () ->
         {
             try {

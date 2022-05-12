@@ -25,6 +25,7 @@ public class VirusChecker extends Checker{
 
     @Override
     public void start() {
+        this.controller.reportMsg(new Msg(Msg.WARN, "Starting", "Starting Virus Checker" , "VirusChecker"));
         Runnable runnable = () ->
         {
             try {

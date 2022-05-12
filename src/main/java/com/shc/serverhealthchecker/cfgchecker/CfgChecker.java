@@ -31,6 +31,7 @@ public class CfgChecker extends Checker {
 
     @Override
     public void start() {
+        this.controller.reportMsg(new Msg(Msg.WARN, "Starting", "Starting Config Checker" , "CFGChecker"));
         System.out.println("CFG");
         Runnable runnable = () ->
         {
